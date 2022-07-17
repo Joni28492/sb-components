@@ -7,16 +7,23 @@ type User = {
   name: string;
 };
 
-export const Page: React.VFC = () => {
-  const [user, setUser] = React.useState<User>();
+export interface PageProps {
+  user?: User;
+  onLogin: () => void;
+  onLogout: () => void;
+  onCreateAccount: () => void;
+}
+
+export const Page = ({ user, onLogin, onLogout, onCreateAccount }: PageProps) => {
+
 
   return (
     <article>
       <Header
-        user={user}
-        onLogin={() => setUser({ name: 'Jane Doe' })}
-        onLogout={() => setUser(undefined)}
-        onCreateAccount={() => setUser({ name: 'Jane Doe' })}
+        user={(user) ? user : undefined}
+        onLogin={onLogin}
+        onLogout={onLogout}
+        onCreateAccount={onCreateAccount}
       />
 
       <section>
